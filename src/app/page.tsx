@@ -1,10 +1,10 @@
+import HeroSection from "@/components/HeroSection"
 import Navbar from "@/components/Navbar"
-import Uploader from "@/components/Uploader"
 const page = () => {
   return (
     <>
     <Navbar/>
-      {/* <Uploader/> */}
+    <HeroSection/>
     </>
   )
 }
