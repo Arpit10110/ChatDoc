@@ -1,25 +1,33 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Stardos+Stencil:wght@400;700&display=swap');
 
-
-
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --animate-shimmer: shimmer 2s linear infinite;
+
+  @keyframes shimmer {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
 }
 
-
-
-html{
+html {
   font-size: 75%;
 }
 
 body {
- background-color: black;
- color: white;
+  background-color: black;
+  color: white;
 }
-.font-tektur{
+
+.font-tektur {
   font-family: "Stardos Stencil", system-ui;
 }

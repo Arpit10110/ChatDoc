@@ -8,9 +8,23 @@ export const POST = async(req)=>{
     try {
         const User = await currentUser()
         const dbcollection = await connectdb();
-        const {filetext} =await req.json()
+        const {filetext,filename,totalpages} =await req.json()
+
+        //
+        
+        const cc= Math.floor(totalpages/10);
+        let chunksize; 
+       if(cc==0){
+         chunksize = 1000;
+       }else{
+         chunksize = cc*1000;
+       }
+
+
+
+
         const spliter = new RecursiveCharacterTextSplitter({
-                    chunkSize:500,
+                    chunkSize:chunksize,
                     separators:['\n\n','\n' ,'  ','  '],
                     chunkOverlap:100 
                 })
@@ -28,7 +42,7 @@ export const POST = async(req)=>{
                 const client = new InferenceClient(`${process.env.NEXT_PUBLIC_API_VECTOR_EMBEDING_API}`);
                 const output = await client.featureExtraction({
                     model: "intfloat/multilingual-e5-large",
-                    inputs: "Today is a sunny day and I will get some ice cream.",
+                    inputs: chunkdata,
                     provider: "hf-inference",
                 });
                 console.log(output)
@@ -36,7 +50,7 @@ export const POST = async(req)=>{
                     $vector: output,
                     description:chunkdata,
                     userid:User.id,
-                    chat_name:"samplepdf"
+                    chat_name:filename
                 })
                 console.log(res)
             }

@@ -14,6 +14,7 @@ const Uploader = () => {
   const [FileText, SetFileText] = useState<string>("");
   const [FileName, SetFileName] = useState<string>("");
   const [open, setOpen] = useState(false);
+  const [Totalpages,SetTotalpages] = useState<number>(0);
 
   const pdfextractor = async (files: File[]) => {
     const file = files[0];
@@ -26,7 +27,7 @@ const Uploader = () => {
       try {
         const pdf = await pdfjsLib.getDocument({ data: typedarray }).promise;
         let extractedText = ""; // Initialize an empty string to store the extracted text
-
+        SetTotalpages(pdf.numPages);
         for (let i = 1; i <= pdf.numPages; i++) {
           const page = await pdf.getPage(i);
           const textContent = await page.getTextContent();
@@ -43,8 +44,10 @@ const Uploader = () => {
 
   const submitFile = async () => {
     try {
-      const {data} = await axios.post("api/uploadfile",{
-        filetext: FileText
+      const {data} = await axios.post("/api/uploadfile",{
+        filetext: FileText,
+        filename:FileName,
+        totalpages:Totalpages
       })
       console.log(data);
     } catch (error) {
@@ -74,7 +77,7 @@ const Uploader = () => {
       })
       console.log(data);
       if(data.success){
-        // submitFile();
+        submitFile();
       }else{
         setOpen(false);
         toast.error(data.message, {
