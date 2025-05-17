@@ -1,3 +1,4 @@
+import FeatureSec from "@/components/FeatureSec"
 import HeroSection from "@/components/HeroSection"
 import Navbar from "@/components/Navbar"
 const page = () => {
@@ -5,6 +6,7 @@ const page = () => {
     <>
     <Navbar/>
     <HeroSection/>
+    <FeatureSec/>
     </>
   )
 }

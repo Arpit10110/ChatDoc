@@ -2,14 +2,22 @@ import { NextResponse } from "next/server";
 import {connectdb} from "@/db/connectdb"
 import { InferenceClient } from "@huggingface/inference";
 import { GoogleGenAI } from "@google/genai";
+import { currentUser } from '@clerk/nextjs/server'
 
 
 export const POST = async(req)=>{
     try {
-        const {userquery,chatname} = await req.json();
+        const User = await currentUser()
+        const {userquery,chatname,chatdata} = await req.json();
+        if (!User) {
+        return NextResponse.json({
+          success: false,
+          message: "User not authenticated",
+        });
+        }
+
         const dbcollection = await connectdb();
 
-        console.log(userquery,chatname);
         const client = new InferenceClient(`${process.env.NEXT_PUBLIC_API_VECTOR_EMBEDING_API}`);
                 
         const messagevector= await client.featureExtraction({
@@ -19,16 +27,19 @@ export const POST = async(req)=>{
         });
 
 
-        const cursor = await dbcollection?.find(null,{
+        const cursor = await dbcollection?.find(
+            {
+                userid: User.id, // Filter by the authenticated user's ID
+                chat_name: chatname, // Filter by the specified chat name
+              },{
             sort:{
-                $vector:messagevector
+                $vector:messagevector,
+                
             },
-            limit:2
+            limit:3
         })
 
         const doucment  = await cursor?.toArray() 
-
-        console.log(doucment)
 
         // starting gemni AI
 
@@ -41,9 +52,15 @@ export const POST = async(req)=>{
         END CONTEXT
         `
 
+        const formattedChatHistory = chatdata
+        .map((msg) => `${msg.role === "user" ? "User" : "AI"}: ${msg.message}`)
+        .join("\n");
+
         const AIprompt = `
         You are an AI assistant created by Arpit Agrahari for his ChatDoc website where user upload the pdf and ask question from their. Your primary role is to answer user questions using the provided context.
-        
+        Chat History:
+        ${formattedChatHistory}
+
         Context:
         ${context}
         
@@ -63,8 +80,6 @@ export const POST = async(req)=>{
             model: "gemini-2.0-flash",
             contents: `UserQuestion: ${userquery} \n Context:${AIprompt }`,
           });
-
-          console.log(airesult)
 
         return NextResponse.json({
             success:true,

@@ -1,25 +1,17 @@
 "use client"
-import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react'
-import herogif from "@/assets/herogif.gif"
+import Link from 'next/link'
 import { TypeAnimation } from 'react-type-animation';
+import Image from 'next/image';
+import ImageSec1 from "@/assets/Sec1Img.png"
+import Marquee from "react-fast-marquee";
 const HeroSection = () => {
   return (
     <>
-        <div className='w-full bg-[#ffffff0f] py-[5rem] ' >
-            <div className='w-full flex flex-col justify-center items-center gap-[2.5rem] cursor-default ' >
-                <h1 className='font-tektur text-[3.5rem] font-bold   ' >🔥 Slide Your PDF In, Get Instant Answers 🔥</h1>
-                <p className='w-[75%] text-center text-[2rem] ' >
-                PDFs were never supposed to be this cool. Just upload, ask anything, and get instant answers like you're chatting with a real one. No more scrolling through 100 pages like it's 2005.
-                </p>
-                
-                <Link className='inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(125deg,#000000,45%,#28292b,55%,#000000)] bg-[length:200%_100%] px-[3rem] font-medium text-slate-400  focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 py-[2rem] hover:scale-[1.03] text-[2.5rem] transition-all ' href={"/playground"} >Let's Get Nerdy 🤖</Link>
-            </div>
-            <div className='flex justify-between w-[80%] m-auto items-center ' >
-              <div className='flex flex-col gap-[1rem] min-w-[40%] ' >
-                  <div className='!text-[2rem] font-semibold ' >
-                    <TypeAnimation
+      <div className='w-full justify-center flex items-center min-h-[70vh] flex-col my-[3rem]   ' >
+         <div className='w-[60%] flex flex-col items-center gap-[1rem]   ' >
+          <div className='!text-[1.5rem] font-semibold w-[55%] flex justify-center items-center rounded-[0.5rem] ' >
+          <TypeAnimation
                         sequence={[
                           'Chat with your PDFs 🤖📄',
                           1000,
@@ -36,14 +28,30 @@ const HeroSection = () => {
                         speed={30}
                         repeat={Infinity}
                       />
-                  </div>
-                  <Link className='inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(125deg,#000000,45%,#28292b,55%,#000000)] bg-[length:200%_100%] px-[3rem] font-medium text-slate-400  focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 py-[2rem] hover:scale-[1.03] text-[2rem] transition-all w-fit ' href={"/playground"} >🎥 Watch How It Works</Link>
-              </div>
-              <div className='w-[20%] ' >
-                <Image className='w-full ' src={herogif} alt='Helllo' />
-              </div>
-            </div>
-        </div>
+          </div>
+           <h1 className='sans-font text-[6.5rem] text-center font-[600] ' >Turn PDFs Into Chat No Boring Stuff</h1>
+           <h6 className='text-[1.7rem] font-semibold text-gray-300 w-[60%] text-center ' >ChatDoc turns boring documents into real-time convos—get answers fast, no scrolling needed.</h6>
+           <div className='flex items-center justify-center gap-[2rem]  mt-[2rem] ' >
+             <Link href={"/playground"} className=' bg-[#ffffff3b] text-white font-semibold px-[2rem] py-[0.5rem] rounded-[0.5rem] text-[1.5rem] hover:scale-[1.03] transition-all '  >Launch Playground</Link>
+             <Link href={"/howitwork"} className=' bg-[#ffffff3b] text-white font-semibold px-[2rem] py-[0.5rem] rounded-[0.5rem] text-[1.5rem]  hover:scale-[1.03] transition-all' >How It Works?</Link>
+           </div>
+         </div>
+         <div className='w-[100%] h-[40vh] animate-float  relative z-[-5] '>
+          <Image className='animate-blink w-[100%] h-full object-cover object-top ' src={ImageSec1} alt='' />
+         </div>
+         <div className='text-[2rem] overflow-hidden w-full font-semibold  ' >
+          <Marquee
+          gradient={false}
+          speed={60}
+          pauseOnHover>
+          <h3 className="mx-[3rem] animate-pulse">⚡ Chat with Any PDF</h3>
+          <h3 className="mx-[3rem] animate-pulse">💬 Instant AI Responses</h3>
+          <h3 className="mx-[3rem] animate-pulse">📄 No More Boring Reading</h3>
+          <h3 className="mx-[3rem] animate-pulse">🧠 Smart Contextual Replies</h3>
+          <h3 className="mx-[3rem] animate-pulse">🚀 Built for Speed & Clarity</h3>
+          </Marquee>
+         </div>
+      </div>
     </>
   )
 }

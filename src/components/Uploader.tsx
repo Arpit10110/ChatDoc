@@ -6,10 +6,13 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useRouter } from "next/navigation";
+
 // Set the workerSrc to a CDN path
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js`;
 
 const Uploader = () => {
+  const router = useRouter();
 
   const [FileText, SetFileText] = useState<string>("");
   const [FileName, SetFileName] = useState<string>("");
@@ -50,8 +53,11 @@ const Uploader = () => {
         totalpages:Totalpages
       })
       console.log(data);
+      router.push(`/playground/chat/${FileName}`);
+      setOpen(false);
     } catch (error) {
       console.log(error);
+      setOpen(false);
     }
   };
 
