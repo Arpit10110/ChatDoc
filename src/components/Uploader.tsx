@@ -111,9 +111,9 @@ const Uploader = () => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-      <div className="mt-[1rem] flex w-[90%] m-auto justify-center flex-col">
-        <div className=" w-full " >
-          <input type="text" placeholder="Name this PDF chat session" className="bg-[#fffefe1c]  w-[30%] text-[1.3rem] py-[0.5rem] px-[1rem] rounded-[5px]" onChange={(e)=>SetFileName(e.target.value)}/>
+      <div className="mt-[3rem] flex w-[90%] m-auto justify-center flex-col max-tablet:gap-[2rem] ">
+        <div className=" w-full  " >
+          <input type="text" placeholder="Name this PDF chat session" className="bg-[#fffefe1c]  w-[30%] text-[1.3rem] py-[0.5rem] px-[1rem] rounded-[5px] max-tablet:w-[50%] " onChange={(e)=>SetFileName(e.target.value)}/>
         </div>
         <FileUpload onChange={pdfextractor} />
         <div className="w-full mt-[1rem] flex justify-center items-center">

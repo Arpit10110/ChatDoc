@@ -12,7 +12,7 @@ const Navbar = () => {
             <div className='flex gap-[2rem] font-semibold text-[1.3rem] items-center ' >
                 <Link className='hover:scale-[1.02] transition-all '  href={"/"} >Home</Link>
                 <Link  className='hover:scale-[1.02] transition-all '  href={"/playground"} >Playground</Link>
-                <Link className='hover:scale-[1.02] transition-all '  href={"#howitworks"} >How it Work</Link>
+                <Link className='hover:scale-[1.02] transition-all '  href={"/#howitworks"} >How it Work</Link>
                 <SignedOut>
                   <Link className='hover:scale-[1.02] transition-all '  href={"/sign-in"} >SignIn</Link>
                 </SignedOut>
