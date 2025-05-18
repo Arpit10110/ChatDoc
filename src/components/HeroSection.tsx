@@ -9,8 +9,8 @@ const HeroSection = () => {
   return (
     <>
       <div className='w-full justify-center flex items-center min-h-[70vh] flex-col my-[3rem]   ' >
-         <div className='w-[60%] flex flex-col items-center gap-[1rem]   ' >
-          <div className='!text-[1.5rem] font-semibold w-[55%] flex justify-center items-center rounded-[0.5rem] ' >
+         <div className='w-[60%] flex flex-col items-center gap-[1rem] max-laptop:w-[75%] max-slaptop:w-[90%] max-mobile:w-full max-tablet:mt-[3rem] ' >
+          <div className='!text-[1.5rem] font-semibold w-[55%] max-mobile:w-[80%] flex justify-center items-center rounded-[0.5rem] ' >
           <TypeAnimation
                         sequence={[
                           'Chat with your PDFs 🤖📄',
@@ -29,8 +29,8 @@ const HeroSection = () => {
                         repeat={Infinity}
                       />
           </div>
-           <h1 className='sans-font text-[6.5rem] text-center font-[600] ' >Turn PDFs Into Chat No Boring Stuff</h1>
-           <h6 className='text-[1.7rem] font-semibold text-gray-300 w-[60%] text-center ' >ChatDoc turns boring documents into real-time convos—get answers fast, no scrolling needed.</h6>
+           <h1 className='sans-font text-[6.5rem] text-center font-[600] max-tablet:text-[6rem] max-mobile:text-[5rem] max-smobile:text-[4.5rem] max-xsmobile:text-[4rem] max-[340px]:text-[3.5rem] ' >Turn PDFs Into Chat No Boring Stuff</h1>
+           <h6 className='text-[1.7rem] font-semibold text-gray-300 w-[60%] text-center max-mobile:w-[80%] ' >ChatDoc turns boring documents into real-time convos—get answers fast, no scrolling needed.</h6>
            <div className='flex items-center justify-center gap-[2rem]  mt-[2rem] ' >
              <Link href={"/playground"} className=' bg-[#ffffff3b] text-white font-semibold px-[2rem] py-[0.5rem] rounded-[0.5rem] text-[1.5rem] hover:scale-[1.03] transition-all '  >Launch Playground</Link>
              <Link href={"/howitwork"} className=' bg-[#ffffff3b] text-white font-semibold px-[2rem] py-[0.5rem] rounded-[0.5rem] text-[1.5rem]  hover:scale-[1.03] transition-all' >How It Works?</Link>

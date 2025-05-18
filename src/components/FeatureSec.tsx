@@ -35,16 +35,16 @@ const FeatureSec = () => {
   return (
     <>
         <div className='py-[8rem] bg-[#ffffff0d] ' >
-            <p className='text-center w-[60%] text-[2.5rem] m-auto  text-gray-300  font-semibold' >
+            <p className='text-center w-[60%] text-[2.5rem] m-auto max-tablet:w-[90%]  text-gray-300  font-semibold' >
             Say goodbye to doc overload. ChatDoc gives you fast, smart, and simple answers—straight from your files.
             </p>
             <div>
-                <div className='flex justify-around mt-[8rem] ' >
+                <div className='flex justify-around mt-[8rem] flex-wrap max-tablet:gap-y-[5rem] ' >
                     {
                         features.map((i, index) => (
                            <div
                            style={{ boxShadow: '0px 0px 20px 6px rgb(72,64,196,0.30)' }} 
-                            key={index} className='w-[25%] bg-black py-[2rem] px-[1rem] rounded-[1rem] flex items-center flex-col gap-[0.5rem] hover:scale-[1.03] transition-all  '  > 
+                            key={index} className='w-[25%] bg-black py-[2rem] px-[1rem] rounded-[1rem] flex items-center flex-col gap-[0.5rem] hover:scale-[1.03] transition-all max-tablet:w-[40%] max-mobile:w-[70%] max-smobile:w-[80%] '  > 
                                 <Image className='w-[20%]' src={i.icon} alt='Icon'  />
                                 <h2 className='text-[2rem] text-center font-semibold ' >{i.title}</h2>
                                 <p className='text-[1.6rem] text-center text-gray-200 ' >{i.description}</p>

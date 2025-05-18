@@ -2,6 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Stardos+Stencil:wght@400;700&display=swap');
 
 @theme {
+
+  --breakpoint-laptop: 1255px;
+  --breakpoint-slaptop: 1024px;
+  --breakpoint-tablet: 780px;
+  --breakpoint-mobile: 670px;
+  --breakpoint-smobile: 460px;
+  --breakpoint-xsmobile: 375px;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -76,4 +84,25 @@ body {
 .allchat::-webkit-scrollbar-thumb {
   background-color: #555; /* Dark gray thumb */
   border-radius: 8px;
+}
+
+@media (max-width: 1024px) {
+  html {
+    font-size: 70%;
+  }
+}
+@media (max-width: 780px) {
+  html {
+    font-size: 65%;
+  }
+}
+@media (max-width: 670px) {
+  html {
+    font-size: 60%;
+  }
+}
+@media (max-width: 460px) {
+  html {
+    font-size: 55%;
+  }
 }
