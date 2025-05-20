@@ -11,7 +11,7 @@ import Dialog from '@mui/material/Dialog';
 import Link from "next/link";
 
 // Set the workerSrc to a CDN path
-pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js`;
+pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js`; 
 
 const Uploader = () => {
   const router = useRouter();
