@@ -11,7 +11,7 @@ import Dialog from '@mui/material/Dialog';
 import Link from "next/link";
 
 // Set the workerSrc to a CDN path
-pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js`; 
+pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`; 
 
 const Uploader = () => {
   const router = useRouter();
@@ -26,6 +26,7 @@ const Uploader = () => {
 
   const pdfextractor = async (files: File[]) => {
     const file = files[0];
+    console.log("file", file);
     if (!file) return;
 
     const reader = new FileReader();
@@ -42,6 +43,7 @@ const Uploader = () => {
           const textItems = textContent.items.map((item: any) => item.str);
           extractedText += textItems.join(" ") ;
         }
+        console.log("extractedText", extractedText);
         SetFileText(extractedText); 
       } catch (err) {
         console.error("Error reading PDF:", err);
