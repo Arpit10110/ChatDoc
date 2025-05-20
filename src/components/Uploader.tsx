@@ -7,6 +7,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useRouter } from "next/navigation";
+import Dialog from '@mui/material/Dialog';
+import Link from "next/link";
 
 // Set the workerSrc to a CDN path
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js`;
@@ -18,6 +20,9 @@ const Uploader = () => {
   const [FileName, SetFileName] = useState<string>("");
   const [open, setOpen] = useState(false);
   const [Totalpages,SetTotalpages] = useState<number>(0);
+  const [chatdialog, setChatdialog] = useState(false);
+  const [prevchats, setPrevchats] = useState<any[]>([]);
+  const [Loading,SetLoading] = useState(false);
 
   const pdfextractor = async (files: File[]) => {
     const file = files[0];
@@ -45,15 +50,36 @@ const Uploader = () => {
     reader.readAsArrayBuffer(file);
   };
 
-  const submitFile = async () => {
+  const sanitizeChatName = (name: string): string => {
+    return name
+      .toLowerCase() 
+      .trim() 
+      .replace(/[^a-z0-9\s-]/g, "") 
+      .replace(/\s+/g, "-"); 
+  };
+
+  const submitFile = async (chname:string) => {
     try {
       const {data} = await axios.post("/api/uploadfile",{
         filetext: FileText,
-        filename:FileName,
+        filename:chname,
         totalpages:Totalpages
       })
       console.log(data);
-      router.push(`/playground/chat/${FileName}`);
+      if(data.success == true){
+        router.push(`/playground/chat/${chname}`);
+      }else{
+        toast.error(" Something went Wrong ", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
+      }
       setOpen(false);
     } catch (error) {
       console.log(error);
@@ -78,12 +104,14 @@ const Uploader = () => {
           });
         return;
       }
+      const chname = sanitizeChatName(FileName);
+      console.log(chname);
       const {data} = await axios.post("api/findchatname",{
-        filename:FileName
+        filename:chname
       })
       console.log(data);
       if(data.success){
-        submitFile();
+        submitFile(chname);
       }else{
         setOpen(false);
         toast.error(data.message, {
@@ -103,6 +131,20 @@ const Uploader = () => {
     }
   }
 
+  const getprevchats = async()=>{
+    try {
+      SetLoading(true);
+      setChatdialog(true);
+      const {data} = await axios.get("/api/getchatname")
+      console.log(data);
+      setPrevchats(data.data);
+      SetLoading(false);
+    } catch (error) {
+      SetLoading(false);
+      console.log(error);
+    }
+  }
+
   return (
     <>
      <Backdrop
@@ -111,9 +153,31 @@ const Uploader = () => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
+      <Dialog open={chatdialog} onClose={() => setChatdialog(false)}  fullWidth={true}  >
+        <div className="w-full min-h-[50vh] bg-gray-900  text-white flex flex-col  items-center " >
+          <h2 className="text-center mt-[1rem] text-[1.5rem] font-bold "  >Chat Names</h2>
+          <div className="flex w-full  flex-col items-center    gap-[0.8rem] py-[2rem] mt-[1rem] overflow-y-scroll h-[40vh] allchat" >
+           {
+            Loading?
+            <h2 className="text-[2rem] font-bold m-auto "  >Loading...</h2>:
+            prevchats.map((i:{chatname:String},index:any)=>{
+              return(
+                <div key={index} className="flex justify-between w-[90%]   bg-gray-800 p-[0.5rem] items-center rounded-[0.5rem] text-[1.2rem] cursor-pointer hover:scale-[1.01] transition-all font-semibold  " >
+                <h3>{i.chatname}</h3>
+                <Link className="p-[0.3rem] bg-[#fffefe1c] rounded-[3px]  font-semibold  "   href={`/playground/chat/${i.chatname}`} >Select the Chat</Link>
+              </div>
+              )
+            })
+           }
+          </div>
+        </div>
+      </Dialog>
       <div className="mt-[3rem] flex w-[90%] m-auto justify-center flex-col max-tablet:gap-[2rem] ">
-        <div className=" w-full  " >
+        <div className=" w-full flex justify-between items-center " >
           <input type="text" placeholder="Name this PDF chat session" className="bg-[#fffefe1c]  w-[30%] text-[1.3rem] py-[0.5rem] px-[1rem] rounded-[5px] max-tablet:w-[50%] " onChange={(e)=>SetFileName(e.target.value)}/>
+          <div>
+            <button className="px-[1rem] py-[0.5rem] bg-[#fffefe1c] text-[1.5rem]  rounded-[5px] cursor-pointer hover:scale-[1.02] transition-all " onClick={getprevchats} >🕘 Previous Chats</button>
+          </div>
         </div>
         <FileUpload onChange={pdfextractor} />
         <div className="w-full mt-[1rem] flex justify-center items-center">

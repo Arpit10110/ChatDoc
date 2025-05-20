@@ -26,6 +26,8 @@ export const POST = async(req)=>{
                     provider: "hf-inference",
         });
 
+        console.log(User.id )
+        console.log(chatname)
 
         const cursor = await dbcollection?.find(
             {
@@ -40,6 +42,7 @@ export const POST = async(req)=>{
         })
 
         const doucment  = await cursor?.toArray() 
+        console.log("doucment",doucment)
 
         // starting gemni AI
 

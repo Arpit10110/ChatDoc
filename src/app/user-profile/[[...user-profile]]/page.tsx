@@ -6,10 +6,10 @@ import { SignOutButton, UserProfile } from '@clerk/nextjs'
 const UserProfilePage = () => (
  <>
     <Navbar/>
-    <div className='flex justify-center items-center  w-full my-[2rem] flex-col ' >
+    <div className='flex justify-center items-center  w-full my-[2rem] flex-col gap-[2rem] ' >
     <div className='w-[80%] flex justify-end  '>
                     <SignOutButton>
-                        <button className=' cursor-pointer px-[2rem] py-[0.5rem] text-[1.3rem] hover:scale-[1.02] transition-all rounded-md text-white bg-gray-900 ' >SignOut</button>
+                        <button className=' cursor-pointer px-[2rem] py-[0.5rem] text-[1.3rem] hover:scale-[1.02] transition-all rounded-md text-white bg-[#fffefe1c]  ' >SignOut</button>
                     </SignOutButton>
                 </div>
     <UserProfile appearance={
