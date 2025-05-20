@@ -13,7 +13,7 @@ const page = () => {
                     },
                     elements:{
                         cardBox:"!w-[100%]",
-                        rootBox:"!w-[90%] max-tablet:!w-[90%]  "
+                        rootBox:"!w-[35%] max-tablet:!w-[90%]  "
                     }
                 }
             } />
