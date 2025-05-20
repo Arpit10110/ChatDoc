@@ -13,7 +13,7 @@ export const POST = async(req)=>{
         console.log(filename,filetext,totalpages);
 
         //coonect the mongodb
-        const db = await Mongconnectdb();
+        await Mongconnectdb();
         
         const cc= Math.floor(totalpages/10);
         let chunksize; 

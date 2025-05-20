@@ -1,8 +1,5 @@
 "use client"
 import React, { useEffect } from 'react'
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
-import SearchIcon from '@mui/icons-material/Search';
-import FileCopyIcon from '@mui/icons-material/FileCopy';
 import Image from 'next/image';
 
 import Icon1 from "@/assets/searchIcon.png"
