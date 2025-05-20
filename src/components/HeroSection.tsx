@@ -14,7 +14,7 @@ const HeroSection = () => {
   
   return (
     <>
-      <div className='w-full justify-center flex items-center min-h-[70vh] flex-col my-[3rem]   ' >
+      <div className='w-full justify-center flex items-center min-h-[70vh] flex-col my-[3rem]  max-mobile:min-h-[50vh]  ' >
          <div className='w-[60%] flex flex-col items-center gap-[1rem] max-laptop:w-[75%] max-slaptop:w-[90%] max-mobile:w-full max-tablet:mt-[3rem] ' >
           <div data-aos="zoom-in-up" data-aos-duration="1500" data-aos-easing="ease-in-out" data-aos-delay="500"  className='!text-[1.5rem] font-semibold w-[55%] max-mobile:w-[80%] flex justify-center items-center rounded-[0.5rem] ' >
           <TypeAnimation
@@ -42,7 +42,7 @@ const HeroSection = () => {
              <Link href={"/howitwork"} className=' bg-[#ffffff3b] text-white font-semibold px-[2rem] py-[0.5rem] rounded-[0.5rem] text-[1.5rem]  hover:scale-[1.03] transition-all' >How It Works?</Link>
            </div>
          </div>
-         <div className='w-[100%] h-[40vh] animate-float  relative z-[-5] '>
+         <div className='w-[100%] h-[40vh] animate-float  relative z-[-5] max-mobile:h-[15vh] '>
           <Image className='animate-blink w-[100%] h-full object-cover object-top ' src={ImageSec1} alt='' />
          </div>
          <div className='text-[2rem] overflow-hidden w-full font-semibold  ' >
